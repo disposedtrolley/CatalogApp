@@ -1,7 +1,8 @@
 from flask import Flask
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config['WTF_CSRF_ENABLED'] = True
+app.config['SECRET_KEY'] = 'you-will-never-guess'
 
 from app import views
 
