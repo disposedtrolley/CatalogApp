@@ -19,7 +19,7 @@ class User(Base):
 class Category(Base):
     __tablename__ = "category"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer)
     name = Column(String(250), primary_key=True)
 
     @property
