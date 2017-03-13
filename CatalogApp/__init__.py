@@ -20,7 +20,7 @@ app.config['SECRET_KEY'] = 'you-will-never-guess'
 app.jinja_env.globals['LOGIN_SESSION'] = login_session
 
 CLIENT_ID = json.loads(
-    open('/var/www/catalogapp/catalogapp/client_secrets.json', 'r').read())['web']['client_id']
+    open('/var/www/CatalogApp/CatalogApp/client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Item Catalog"
 
 
