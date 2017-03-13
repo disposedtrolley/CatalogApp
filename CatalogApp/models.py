@@ -37,7 +37,7 @@ class Item(Base):
     name = Column(String(500), nullable=False)
     description = Column(String(2000))
     category = relationship(Category)
-    category_name = Column(String(250), ForeignKey("category.name"))
+    category_name = Column(String(250), ForeignKey("category.name"), unique=True)
     user = relationship(User)
     user_id = Column(Integer, ForeignKey('user.id'))
     created_at = Column(DateTime, default=datetime.datetime.now())
