@@ -54,5 +54,5 @@ class Item(Base):
 
 
 if __name__ == "__main__":
-    engine = create_engine('sqlite:///itemcatalog.db')
+    engine = create_engine('postgresql://catalog:123@localhost/catalog')
     Base.metadata.create_all(engine)
