@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert {{category}}">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="row">
+    <div class="col-lg-8 col-centered">
+        <h2>{{curr_category}}</h2>
+        <ul class="list-group">
+            {% for item in items %}
+                <li class="list-group-item">
+                    <a href="/{{item.category_name}}/{{item.name}}">
+                        {{item.name}}
+                    </a>
+                    <a href="/{{item.category_name}}">
+                        <span class="category">{{item.category_name}}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newItemModal"><span class="glyphicon glyphicon-plus"></span> New Item</button>
+    </div>
+</div>
+
+<!-- New Item Modal -->
+<div class="modal fade" id="newItemModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Item</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/newitem" method="post">
+                    <div class="input-group">
+                        <select class="selectpicker" title="Category" name="item-category">
+                            {% for category in categories %}
+                                <option data-tokens="{{category.name}}">{{category.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="text" class="form-control" placeholder="Item Name" name="item-name">
+                    </div>
+                    <hr class="colorgraph">
+                    <textarea class="form-control" rows="10" name="item-description" placeholder="Item Description"></textarea>
+                    <hr class="colorgraph">
+                    <input type="submit" name="save" class="btn btn-success btn-block" value="Add Item">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
