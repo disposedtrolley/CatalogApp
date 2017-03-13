@@ -19,7 +19,7 @@ class User(Base):
 class Category(Base):
     __tablename__ = "category"
 
-    id = Column(Integer)
+    id = Column(Integer, primary_key=True)
     name = Column(String(250), primary_key=True)
 
     @property
@@ -36,10 +36,10 @@ class Item(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(500), nullable=False)
     description = Column(String(2000))
+    category = relationship(Category)
     category_name = Column(String(250), ForeignKey("category.name"))
-    category = relationship(Category, foreign_keys=[category_name])
+    user = relationship(User)
     user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User, foreign_keys=[user_id])
     created_at = Column(DateTime, default=datetime.datetime.now())
 
     @property
