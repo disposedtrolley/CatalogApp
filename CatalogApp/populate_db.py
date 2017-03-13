@@ -41,7 +41,7 @@ for category in categories:
 for item in items:
     category = session.query(Category).filter_by(name=item.get("category")).one()
     new_item = Item(name=item.get("name"),
-                    category_id=category.id,
+                    category_name=category.name,
                     description=item.get("description"),
                     user_id=1)
     session.add(new_item)
