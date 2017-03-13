@@ -251,7 +251,7 @@ def disconnect():
 
 
 # Connect to the database and create the session.
-engine = create_engine('sqlite:///itemcatalog.db')
+engine = create_engine('sqlite:////var/www/CatalogApp/CatalogApp/itemcatalog.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
