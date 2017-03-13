@@ -40,7 +40,7 @@ class Item(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
     created_at = Column(DateTime, default=datetime.datetime.now())
-    __table_args__ = (ForeignKeyConstraint([name], [Category.name]), {})
+    __table_args__ = (ForeignKeyConstraint([category_name], [Category.name]), {})
 
     @property
     def serialize(self):
