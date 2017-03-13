@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, ForeignKeyConstraint
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -19,14 +19,13 @@ class User(Base):
 class Category(Base):
     __tablename__ = "category"
 
-    id = Column(Integer, primary_key=True)
+    # id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False, primary_key=True)
 
     @property
     def serialize(self):
         return {
-            "name": self.name,
-            "id": self.id
+            "name": self.name
         }
 
 
@@ -36,11 +35,11 @@ class Item(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(500), nullable=False)
     description = Column(String(2000))
-    category_name = Column(String(250))
+    category_name = Column(String(250), ForeignKey("category.name"))
+    category = relationship(Category)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
     created_at = Column(DateTime, default=datetime.datetime.now())
-    __table_args__ = (ForeignKeyConstraint([category_name], [Category.name]), {})
 
     @property
     def serialize(self):
