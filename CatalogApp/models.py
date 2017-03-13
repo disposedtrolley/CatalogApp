@@ -19,8 +19,8 @@ class User(Base):
 class Category(Base):
     __tablename__ = "category"
 
-    name = Column(String(250), nullable=False, primary_key=True)
     id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False, primary_key=True)
 
     @property
     def serialize(self):
@@ -41,6 +41,7 @@ class Item(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
     created_at = Column(DateTime, default=datetime.datetime.now())
+    __table_args__ = (ForeignKeyConstraint([id, name],[Category.id, Category.name]), {})
 
     @property
     def serialize(self):
