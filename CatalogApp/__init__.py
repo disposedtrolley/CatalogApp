@@ -251,7 +251,7 @@ def disconnect():
 
 
 # Connect to the database and create the session.
-engine = create_engine('postgresql://catalog:@localhost/catalog')
+engine = create_engine('postgresql://catalog@localhost/catalog')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
