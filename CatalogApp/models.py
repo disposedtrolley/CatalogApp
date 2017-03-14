@@ -19,8 +19,7 @@ class User(Base):
 class Category(Base):
     __tablename__ = "category"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(250), primary_key=True, unique=True)
+    name = Column(String(250), primary_key=True)
 
     @property
     def serialize(self):
@@ -37,7 +36,7 @@ class Item(Base):
     name = Column(String(500), nullable=False)
     description = Column(String(2000))
     category = relationship(Category)
-    category_name = Column(String(250), ForeignKey("category.name"), unique=True)
+    category_name = Column(String(250), ForeignKey("category.name"))
     user = relationship(User)
     user_id = Column(Integer, ForeignKey('user.id'))
     created_at = Column(DateTime, default=datetime.datetime.now())
